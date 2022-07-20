@@ -39,11 +39,24 @@ public class Game
             System.out.print("Enter a number 0-9999: ");
             num = s.nextInt();
             
-            // only increment tries if the same number wasn't guessed multiple times consecutively
+            // only count unique consecutive guesses
             if (num != guess)
             {
                 guess = num;
                 tries++;
+            }
+            
+            if (guess > secretNumber)
+            {
+                System.out.println(guess + " is too large!");
+            }
+            else if (guess < secretNumber)
+            {
+                System.out.println(guess + " is too small!");
+            }
+            else
+            {
+                System.out.println(guess + " is correct. You took " + tries + " tries.");
             }
         }
     }
