@@ -17,7 +17,16 @@ public class Game
     {
         Random rand = new Random();
         secretNumber = rand.nextInt(10000);
+        tries = 0;
+        guess = -1;
     }
+    
+    public int getSecretNumber() { return secretNumber; }
+    public int getTries() { return tries; }
+    public int getGuess() { return guess; }
+    
+    public void setGuess(int guess) { this.guess = guess; }
+    public void incrementTries() { tries++; }
     
     public void RunGame()
     {
