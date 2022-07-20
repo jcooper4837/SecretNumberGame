@@ -63,7 +63,16 @@ public class Game
     
     public static void main(String[] args)
     {
-        Game newGame = new Game();
-        newGame.RunGame();
+        System.out.println("Welcome to the Secret Number Game.");
+        System.out.println("Try to guess the secret number in as few tries as possible.");
+        
+        Scanner s = new Scanner(System.in);
+        String replay;
+        do {
+            Game newGame = new Game();
+            newGame.RunGame();
+            System.out.print("Enter the number 0 to play again. Enter anything else to quit: ");
+            replay = s.next();
+        } while (replay.equals("0"));
     }
 }
