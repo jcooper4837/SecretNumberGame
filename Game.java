@@ -16,7 +16,7 @@ public class Game
     public Game()
     {
         Random rand = new Random();
-        secretNumber = rand.nextInt(10000);
+        secretNumber = rand.nextInt(10000); // initializes with a value 0-9999
         tries = 0;
         guess = -1;
     }
@@ -30,7 +30,22 @@ public class Game
     
     public void RunGame()
     {
+        Scanner s = new Scanner(System.in);
+        int num;
         
+        // game loop runs until correct number is guessed
+        while (guess != secretNumber)
+        {
+            System.out.print("Enter a number 0-9999: ");
+            num = s.nextInt();
+            
+            // only increment tries if the same number wasn't guessed multiple times consecutively
+            if (num != guess)
+            {
+                guess = num;
+                tries++;
+            }
+        }
     }
     
     public static void main(String[] args)
