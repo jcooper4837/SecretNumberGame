@@ -32,12 +32,28 @@ public class Game
     {
         Scanner s = new Scanner(System.in);
         int num;
+        String in;
         
         // game loop runs until correct number is guessed
         while (guess != secretNumber)
         {
             System.out.print("Enter a number 0-9999: ");
-            num = s.nextInt();
+            in = s.nextLine();
+            
+            // Exception handling to ensure the given value is an integer
+            while (true)
+            {
+                try
+                {
+                    num = Integer.parseInt(in);
+                    break;
+                }
+                catch (NumberFormatException e)
+                {
+                    System.out.print("Please enter a valid number 0-9999 (ex: 5280): ");
+                    in = s.nextLine();
+                }
+            }
             
             // only count unique consecutive guesses
             if (num != guess)
@@ -71,7 +87,7 @@ public class Game
         do {
             Game newGame = new Game();
             newGame.RunGame();
-            System.out.print("Enter the number 0 to play again. Enter anything else to quit: ");
+            System.out.print("\nEnter the number 0 to play again. Enter anything else to quit: ");
             replay = s.next();
         } while (replay.equals("0"));
     }
