@@ -16,7 +16,7 @@ public class Game
     public Game()
     {
         Random rand = new Random();
-        secretNumber = rand.nextInt(100); // initializes with a value 0-9999
+        secretNumber = rand.nextInt(10000); // initializes with a value 0-9999
         tries = 0;
         guess = -1;
     }
