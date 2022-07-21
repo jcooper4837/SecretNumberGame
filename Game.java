@@ -16,7 +16,7 @@ public class Game
     public Game()
     {
         Random rand = new Random();
-        secretNumber = rand.nextInt(10000); // initializes with a value 0-9999
+        secretNumber = rand.nextInt(100); // initializes with a value 0-9999
         tries = 0;
         guess = -1;
     }
@@ -26,7 +26,51 @@ public class Game
     public int getGuess() { return guess; }
     
     public void setGuess(int guess) { this.guess = guess; }
-    public void incrementTries() { tries++; }
+    
+    public String compareGuess()
+    {
+        if (guess > secretNumber)
+        {
+            return guess + " is too large!";
+        }
+        else if (guess < secretNumber)
+        {
+            return guess + " is too small!";
+        }
+        else
+        {
+            return guess + " is correct. You took " + tries + " tries.";
+        }
+    }
+    
+    public void incrementTries(int num)
+    {
+        // only count unique consecutive guesses
+        if (num != guess)
+        {
+            guess = num;
+            tries++;
+        }
+    }
+    
+    public int validateInput(String in, Scanner s)
+    {
+        // Exception handling to ensure the given value is an integer
+        int num;
+        while (true)
+        {
+            try
+            {
+                num = Integer.parseInt(in);
+                return num;
+            }
+            catch (NumberFormatException e)
+            {
+                System.out.print("Please enter a valid number 0-9999 (ex: 5280): ");
+                in = s.nextLine();
+            }
+        }
+    }
     
     public void RunGame()
     {
@@ -39,41 +83,9 @@ public class Game
         {
             System.out.print("Enter a number 0-9999: ");
             in = s.nextLine();
-            
-            // Exception handling to ensure the given value is an integer
-            while (true)
-            {
-                try
-                {
-                    num = Integer.parseInt(in);
-                    break;
-                }
-                catch (NumberFormatException e)
-                {
-                    System.out.print("Please enter a valid number 0-9999 (ex: 5280): ");
-                    in = s.nextLine();
-                }
-            }
-            
-            // only count unique consecutive guesses
-            if (num != guess)
-            {
-                guess = num;
-                tries++;
-            }
-            
-            if (guess > secretNumber)
-            {
-                System.out.println(guess + " is too large!");
-            }
-            else if (guess < secretNumber)
-            {
-                System.out.println(guess + " is too small!");
-            }
-            else
-            {
-                System.out.println(guess + " is correct. You took " + tries + " tries.");
-            }
+            num = validateInput(in, s);
+            incrementTries(num);
+            System.out.println(compareGuess());
         }
     }
     
